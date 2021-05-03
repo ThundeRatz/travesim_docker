@@ -1,0 +1,13 @@
+*.md
+docs/
+
+.git/
+.vscode/
+
+.gitignore
+.gitmodules
+
+Dockerfile
+docker-compose.yml
+
+LICENSE
