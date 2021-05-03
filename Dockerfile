@@ -4,6 +4,9 @@
 
 FROM osrf/ros:noetic-desktop-full-focal
 
+# Used to access local X server
+USER root
+
 ENV CATKIN_WS /root/catkin_ws/
 
 RUN mkdir -p ${CATKIN_WS}/src/travesim
