@@ -1,0 +1,6 @@
+[submodule "travesim_adapters"]
+	path = travesim_adapters
+	url = https://github.com/ThundeRatz/travesim_adapters.git
+[submodule "travesim"]
+	path = travesim
+	url = https://github.com/ThundeRatz/travesim.git
