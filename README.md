@@ -29,7 +29,7 @@ sudo apt-get install python3-rocker
 If you don't have the ROS repos or you don't use a Debian-based distro, you may also install `rocker` with `pip`
 
 ```bash
-python -m pip install rocker 
+python -m pip install rocker
 ```
 
 ## 🏁 Run
@@ -39,13 +39,13 @@ python -m pip install rocker
 For Intel integrated graphics cards
 
 ```bash
-rocker --devices /dev/dri/card0 --x11 --network host thunderatz/travesim
+rocker --devices /dev/dri/card0 --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
 ```
 
 For NVidia GPUs
 
 ```bash
-rocker --nvidia --x11 --network host thunderatz/travesim
+rocker --nvidia --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
 ```
 
 ### 🐋 docker
@@ -59,5 +59,5 @@ docker run -it \
     --volume /tmp/.docker.xauth:/tmp/.docker.xauth \
     --volume /tmp/.X11-unix:/tmp/.X11-unix \
     --network host \
-    thunderatz/travesim
+    ghcr.io/thunderatz/travesim_pkg:stable
 ```
