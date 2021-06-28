@@ -37,4 +37,7 @@ EXPOSE 20011
 EXPOSE 20012
 EXPOSE 20013
 
-CMD . devel/setup.sh && roslaunch travesim_adapters adapters.launch
+ENV GUI 0
+ENV ROBOTS_PER_TEAM 3
+
+CMD . devel/setup.sh && roslaunch travesim_adapters adapters.launch gui:=${GUI} robots_per_team:=${ROBOTS_PER_TEAM}
