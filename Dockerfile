@@ -32,6 +32,9 @@ COPY travesim_adapters src/travesim_adapters/
 # Compile any source code whitin the simulation
 RUN /ros_entrypoint.sh catkin_make
 
+RUN mkdir -m 700 /tmp/runtime
+ENV XDG_RUNTIME_DIR=/tmp/runtime
+
 # Expose adapters default ports
 EXPOSE 10002
 EXPOSE 20011
