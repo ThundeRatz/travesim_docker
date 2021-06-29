@@ -32,12 +32,13 @@ COPY travesim_adapters src/travesim_adapters/
 # Compile any source code whitin the simulation
 RUN /ros_entrypoint.sh catkin_make
 
+# Expose adapters default ports
 EXPOSE 10002
 EXPOSE 20011
 EXPOSE 20012
 EXPOSE 20013
 
-ENV GUI 0
+# User options
 ENV ROBOTS_PER_TEAM 3
 
 CMD . devel/setup.sh && roslaunch travesim_adapters adapters.launch gui:=${GUI} robots_per_team:=${ROBOTS_PER_TEAM}
