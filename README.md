@@ -12,10 +12,6 @@
 
 This is a Docker image build around [TraveSim](https://github.com/ThundeRatz/travesim) and [TraveSim adapters](https://github.com/ThundeRatz/travesim_adapters)
 
-## 🌐 Net settings
-
-The configs are the same as [TraveSim adapters default values](https://github.com/ThundeRatz/travesim_adapters/blob/develop/config/network.yml)
-
 ## 📦 Dependencies
 
 The best way to run this image is with [rocker](https://github.com/osrf/rocker), ROS custom docker runner.
