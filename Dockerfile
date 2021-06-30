@@ -9,7 +9,7 @@ USER root
 
 # Install sound dependecies
 RUN apt-get update && apt-get install -y \
-  alsa-utils \
+  pulseaudio \
   && rm -rf /var/lib/apt/lists/*
 
 # Catkin related
