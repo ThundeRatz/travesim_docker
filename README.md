@@ -69,8 +69,8 @@ The container accepts two enviroment variables as running options:
 - `GUI` - Whether to show TraveSim GUI or not, values can be 0 or 1, default is 1.
 - `ROBOTS_PER_TEAM` - Numbers of robots per team, values can be 3 or 5, default is 3.
 
-To pass enviroment variables to docker or rocker use the option `-e NAME[=VALUE]` or `--env NAME[=VALUE]`. For example, using rocker:
+To pass enviroment variables to docker or rocker use the option `--env NAME[=VALUE] [NAME[=VALUE] ...]` or `-e NAME[=VALUE] [NAME[=VALUE] ...]`. For example, using rocker:
 
 ```bash
-rocker --devices /dev/dri/card0 --x11 --network host -e GUI=0 -e ROBOTS_PER_TEAM=5 ghcr.io/thunderatz/travesim_pkg:stable
+rocker --devices /dev/dri/card0 --env GUI=0 ROBOTS_PER_TEAM=5 --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
 ```
