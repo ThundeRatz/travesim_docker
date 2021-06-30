@@ -36,13 +36,13 @@ python -m pip install rocker
 
 ### 🤖 rocker
 
-For Intel integrated graphics cards
+For Intel integrated graphics cards:
 
 ```bash
 rocker --devices /dev/dri/card0 --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
 ```
 
-For NVidia GPUs
+For NVidia GPUs:
 
 ```bash
 rocker --nvidia --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
@@ -50,8 +50,10 @@ rocker --nvidia --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
 
 ### 🐋 docker
 
+Running on linux:
+
 ```bash
-docker run -it \
+docker run -it -rm \
     --env="DISPLAY" \
     --env="TERM" \
     --env="QT_X11_NO_MITSHM=1" \
@@ -64,13 +66,80 @@ docker run -it \
 
 ### 🔧 Options
 
-The container accepts two enviroment variables as running options:
+The container accepts three enviroment variables as running options. To pass enviroment variables to docker or rocker use the option `--env NAME[=VALUE] [NAME[=VALUE] ...]` or `-e NAME[=VALUE] [NAME[=VALUE] ...]`.
 
-- `GUI` - Whether to show TraveSim GUI or not, values can be 0 or 1, default is 1.
-- `ROBOTS_PER_TEAM` - Numbers of robots per team, values can be 3 or 5, default is 3.
+#### 🚸 Graphical User Interface
 
-To pass enviroment variables to docker or rocker use the option `-e NAME[=VALUE]` or `--env NAME[=VALUE]`. For example, using rocker:
+There are two avaible graphical interfaces, TraveSim's gazebo interface and TraveSim Adapters configurers interface. The configurers' interface is always shown, but gazebo in TraveSim can run headless. To do so use the `GUI` option, values can be 0 or 1, default is 1, so the default is to show both GUIs.
+
+For example using rocker:
 
 ```bash
-rocker --devices /dev/dri/card0 --x11 --network host -e GUI=0 -e ROBOTS_PER_TEAM=5 ghcr.io/thunderatz/travesim_pkg:stable
+rocker --devices /dev/dri/card0 --env GUI=0 --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
+```
+
+For example using docker on linux:
+
+```bash
+docker run -it -rm \
+    --env="DISPLAY" \
+    --env="TERM" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --env="XAUTHORITY=/tmp/.docker.xauth" \
+    --env="GUI=0" \
+    --volume /tmp/.docker.xauth:/tmp/.docker.xauth \
+    --volume /tmp/.X11-unix:/tmp/.X11-unix \
+    --network host \
+    ghcr.io/thunderatz/travesim_pkg:stable
+```
+
+#### 🔢 Robots per team
+
+Travesim support games with three or five robots per team. To choose the configuration use the `ROBOTS_PER_TEAM` option, passing the number of robots per team, values can be 3 or 5, default is 3.
+
+For example using rocker:
+
+```bash
+rocker --devices /dev/dri/card0 --env ROBOTS_PER_TEAM=5 --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
+```
+
+For example using docker on linux:
+
+```bash
+docker run -it -rm \
+    --env="DISPLAY" \
+    --env="TERM" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --env="XAUTHORITY=/tmp/.docker.xauth" \
+    --env="ROBOTS_PER_TEAM=5" \
+    --volume /tmp/.docker.xauth:/tmp/.docker.xauth \
+    --volume /tmp/.X11-unix:/tmp/.X11-unix \
+    --network host \
+    ghcr.io/thunderatz/travesim_pkg:stable
+```
+
+#### 🔊 Simulation sounds
+
+Travesim may output some sounds, in order to enable that use the `SOUND` option, values can be 0 or 1, default is 0, so the default is not output sounds. This option currently only works on linux and to be able to use it, it is necessary to pass the sound device while running docker or rocker.
+
+For example using rocker:
+
+```bash
+rocker --devices /dev/dri/card0 /dev/snd --env SOUND=1 --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
+```
+
+For example using docker on linux:
+
+```bash
+docker run -it -rm \
+    --device /dev/snd \
+    --env="DISPLAY" \
+    --env="TERM" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --env="XAUTHORITY=/tmp/.docker.xauth" \
+    --env="SOUND=1" \
+    --volume /tmp/.docker.xauth:/tmp/.docker.xauth \
+    --volume /tmp/.X11-unix:/tmp/.X11-unix \
+    --network host \
+    ghcr.io/thunderatz/travesim_pkg:stable
 ```

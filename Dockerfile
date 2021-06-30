@@ -7,6 +7,12 @@ FROM osrf/ros:noetic-desktop-full-focal
 # Used to access local X server
 USER root
 
+# Install sound dependecies
+RUN apt-get update && apt-get install -y \
+  alsa-utils \
+  && rm -rf /var/lib/apt/lists/*
+
+# Catkin related
 ENV CATKIN_WS /root/catkin_ws/
 
 RUN mkdir -p ${CATKIN_WS}/src/travesim
@@ -32,12 +38,18 @@ COPY travesim_adapters src/travesim_adapters/
 # Compile any source code whitin the simulation
 RUN /ros_entrypoint.sh catkin_make
 
+RUN mkdir -m 700 /tmp/runtime
+ENV XDG_RUNTIME_DIR=/tmp/runtime
+
+# Expose adapters default ports
 EXPOSE 10002
 EXPOSE 20011
 EXPOSE 20012
 EXPOSE 20013
 
-ENV GUI 0
+# User options
+ENV GUI 1
 ENV ROBOTS_PER_TEAM 3
+ENV SOUND 0
 
-CMD . devel/setup.sh && roslaunch travesim_adapters adapters.launch gui:=${GUI} robots_per_team:=${ROBOTS_PER_TEAM}
+CMD . devel/setup.sh && roslaunch travesim_adapters adapters.launch gui:=${GUI} robots_per_team:=${ROBOTS_PER_TEAM} sound:=${SOUND}
