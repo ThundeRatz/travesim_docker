@@ -49,7 +49,7 @@ rocker --nvidia --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
 Running on linux:
 
 ```bash
-docker run -it -rm \
+docker run -it --rm \
     --env="DISPLAY" \
     --env="TERM" \
     --env="QT_X11_NO_MITSHM=1" \
@@ -77,7 +77,7 @@ rocker --devices /dev/dri/card0 --env GUI=0 --x11 --network host ghcr.io/thunder
 For example using docker on linux:
 
 ```bash
-docker run -it -rm \
+docker run -it --rm \
     --env="DISPLAY" \
     --env="TERM" \
     --env="QT_X11_NO_MITSHM=1" \
@@ -102,7 +102,7 @@ rocker --devices /dev/dri/card0 --env ROBOTS_PER_TEAM=5 --x11 --network host ghc
 For example using docker on linux:
 
 ```bash
-docker run -it -rm \
+docker run -it --rm \
     --env="DISPLAY" \
     --env="TERM" \
     --env="QT_X11_NO_MITSHM=1" \
@@ -127,7 +127,7 @@ rocker --devices /dev/dri/card0 /dev/snd --env SOUND=1 --x11 --network host ghcr
 For example using docker on linux:
 
 ```bash
-docker run -it -rm \
+docker run -it --rm \
     --device /dev/snd \
     --env="DISPLAY" \
     --env="TERM" \
