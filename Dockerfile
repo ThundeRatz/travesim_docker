@@ -7,11 +7,6 @@ FROM osrf/ros:noetic-desktop-full-focal
 # Used to access local X server
 USER root
 
-# Install sound dependecies
-RUN apt-get update && apt-get install -y \
-  pulseaudio \
-  && rm -rf /var/lib/apt/lists/*
-
 # Catkin related
 ENV CATKIN_WS /root/catkin_ws/
 
@@ -50,6 +45,5 @@ EXPOSE 20013
 # User options
 ENV GUI 1
 ENV ROBOTS_PER_TEAM 3
-ENV SOUND 0
 
-CMD . devel/setup.sh && roslaunch travesim_adapters adapters.launch gui:=${GUI} robots_per_team:=${ROBOTS_PER_TEAM} sound:=${SOUND}
+CMD . devel/setup.sh && roslaunch travesim_adapters adapters.launch gui:=${GUI} robots_per_team:=${ROBOTS_PER_TEAM} sound:=0

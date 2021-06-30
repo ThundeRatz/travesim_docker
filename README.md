@@ -62,7 +62,7 @@ docker run -it --rm \
 
 ### 🔧 Options
 
-The container accepts three enviroment variables as running options. To pass enviroment variables to docker or rocker use the option `--env NAME[=VALUE] [NAME[=VALUE] ...]` or `-e NAME[=VALUE] [NAME[=VALUE] ...]`.
+The container accepts two enviroment variables as running options. To pass enviroment variables to docker or rocker use the option `--env NAME[=VALUE] [NAME[=VALUE] ...]` or `-e NAME[=VALUE] [NAME[=VALUE] ...]`.
 
 #### 🚸 Graphical User Interface
 
@@ -108,32 +108,6 @@ docker run -it --rm \
     --env="QT_X11_NO_MITSHM=1" \
     --env="XAUTHORITY=/tmp/.docker.xauth" \
     --env="ROBOTS_PER_TEAM=5" \
-    --volume /tmp/.docker.xauth:/tmp/.docker.xauth \
-    --volume /tmp/.X11-unix:/tmp/.X11-unix \
-    --network host \
-    ghcr.io/thunderatz/travesim_pkg:stable
-```
-
-#### 🔊 Simulation sounds
-
-Travesim may output some sounds, in order to enable that use the `SOUND` option, values can be 0 or 1, default is 0, so the default is not output sounds. This option currently only works on linux and to be able to use it, it is necessary to pass the sound device while running docker or rocker.
-
-For example using rocker:
-
-```bash
-rocker --devices /dev/dri/card0 /dev/snd --env SOUND=1 --x11 --network host ghcr.io/thunderatz/travesim_pkg:stable
-```
-
-For example using docker on linux:
-
-```bash
-docker run -it --rm \
-    --device /dev/snd \
-    --env="DISPLAY" \
-    --env="TERM" \
-    --env="QT_X11_NO_MITSHM=1" \
-    --env="XAUTHORITY=/tmp/.docker.xauth" \
-    --env="SOUND=1" \
     --volume /tmp/.docker.xauth:/tmp/.docker.xauth \
     --volume /tmp/.X11-unix:/tmp/.X11-unix \
     --network host \
